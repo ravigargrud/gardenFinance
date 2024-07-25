@@ -1,13 +1,39 @@
 import React from "react";
 import styles from "./Swap.module.css";
+import { useState, useEffect } from "react";
 
-const Swap = () => {
+const Swap = ({ windowObject, walletAddress }) => {
+  // const [balance, setBalance] = useState(0);
+
+  // useEffect(() => {
+  //   const fetchBalance = async () => {
+  //     if (windowObject && walletAddress) {
+  //       try {
+  //         const balance = await windowObject.request({
+  //           method: "eth_getBalance",
+  //           params: [walletAddress, "latest"],
+  //         });
+  //         setBalance(parseFloat(balance));
+  //       } catch (error) {
+  //         console.error("Error fetching balance:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchBalance();
+  // }, [windowObject, walletAddress]);
+
   return (
     <div className={styles.swap}>
       <h1>Swap</h1>
+      {/* <h2>Balance: {balance}</h2> */}
       <hr />
       <div className={styles.first}>
-        <input type="text" placeholder="Enter your Currency" className={styles.input}/>
+        <input
+          type="text"
+          placeholder="Enter your Currency"
+          className={styles.input}
+        />
         <select>
           <option value="option1">BTC</option>
           <option value="option2">Etherium</option>

@@ -28,10 +28,10 @@ const myList = [
   },
 ];
 
-const Previous = () => {
+const Previous = ({windowObject}) => {
   return (
     <div className={styles.previous}>
-      <h1>Previous</h1>
+      <h1>Previous Transactions</h1>
       {myList.map((order, index) => (
         <div key={index} className={styles["table-container"]}>
           <h1>{order.title}</h1>

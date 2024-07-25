@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
 
-import styles from './Main.module.css'
-import Swap from './Swap'
-import Previous from './Previous'
+import styles from "./Main.module.css";
+import Swap from "./Swap";
+import Previous from "./Previous";
 
-const Main = () => {
+const Main = ({ windowObject, walletAddress }) => {
   return (
     <div className={styles.main}>
-        <Swap />
-        <Previous />
+      <Swap windowObject={windowObject} walletAddress={walletAddress} />
+      <Previous windowObject={windowObject} walletAddress={walletAddress} />
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

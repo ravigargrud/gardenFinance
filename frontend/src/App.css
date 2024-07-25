@@ -6,7 +6,7 @@
     rgba(25, 33, 52, 1) 28%,
     rgba(7, 8, 21, 1) 75%
   );
-  height: 100vh;
+  height: min-content;
 
   display: flex;
   flex-direction: column;
