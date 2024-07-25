@@ -1,48 +1,38 @@
-const express = require('express');
-const Web3 = require('web3');
+const { EVMWallet } = require("@catalogfi/wallets");
+const { JsonRpcProvider, Wallet, ethers } = require("ethers");
+const { Orderbook } = require('@gardenfi/orderbook');
 
-const app = express();
-const port = 3000;
 
-// Connect to local Ethereum node
-const provider = new Web3.providers.http.HttpProvider('http://localhost:8545')
-const web3 = new Web3(provider);
-console.log(web3.utils)
-// const web3 = new Web3('http://localhost:8545');
+const {
+  BitcoinWallet,
+  BitcoinProvider,
+  BitcoinNetwork,
+} = require("@catalogfi/wallets");
 
-app.use(express.json());
 
-// API to get the balance of an Ethereum address
-app.get('/balance/:address', async (req, res) => {
-  const { address } = req.params;
-  try {
-    const balance = await web3.eth.getBalance(address);
-    res.send({ balance: web3.utils.fromWei(balance, 'ether') });
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
 
-// API to send a transaction
-app.post('/sendTransaction', async (req, res) => {
-  const { from, to, value, privateKey } = req.body;
-  try {
-    const signedTransaction = await web3.eth.accounts.signTransaction(
-      {
-        to,
-        value: web3.utils.toWei(value, 'ether'),
-        gas: 2000000
-      },
-      privateKey
-    );
+const bitcoinProvider = new BitcoinProvider(BitcoinNetwork.Testnet)
 
-    const receipt = await web3.eth.sendSignedTransaction(signedTransaction.rawTransaction);
-    res.send({ receipt });
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
+// Create a bitcoin wallet from a private key
+const bitcoinPk = '1468e97d3b37c09b38c1c9e66758fa57b15a5a0d5d935c2c53a401811f79a0b0';
+const bitcoinWallet = BitcoinWallet.fromPrivateKey(bitcoinPk, bitcoinProvider);
 
-app.listen(port, () => {
-  console.log(`Ethereum API listening at http://localhost:${port}`);
-});
+// Print bitcoin wallet amount
+bitcoinWallet.getBalance().then(value => console.log(value));
+
+// Create a ethereum wallet from a private key
+const ethereumProvider = new JsonRpcProvider("https://rpc.ankr.com/eth_holesky");
+// const privateKey = "a995a8718cc7b1e1e90405305d270f0f5f60111aedf5deeffc4702a38f04afad";
+const privateKey = "1468e97d3b37c09b38c1c9e66758fa57b15a5a0d5d935c2c53a401811f79a0b0";
+const wallet = new Wallet(privateKey, ethereumProvider);
+const evmWallet = new EVMWallet(wallet);
+
+console.log(evmWallet)
+// Get the Ethereum wallet balance
+// ethereumProvider.getBalance(wallet.address).then(balance => {
+//   // The balance is in Wei, convert it to Ether
+//   const etherString = ethers.utils.formatEther(balance);
+//   console.log('Ethereum Wallet Balance:', etherString);
+// }).catch(error => {
+//   console.error('Error fetching Ethereum wallet balance:', error);
+// });
