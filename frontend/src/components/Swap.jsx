@@ -7,7 +7,7 @@ const Swap = () => {
       <h1>Swap</h1>
       <hr />
       <div className={styles.first}>
-        <p>41</p>
+        <input type="text" placeholder="Enter your Currency" className={styles.input}/>
         <select>
           <option value="option1">BTC</option>
           <option value="option2">Etherium</option>

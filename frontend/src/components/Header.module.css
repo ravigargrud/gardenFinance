@@ -25,11 +25,21 @@
     color: white;
 }
 
+.connectButton {
+    border: none;
+    padding: 0 1rem;
+    border-radius: 10px;
+    background-color: #263151;
+    color: #6d81ca;
+    margin-left: 1rem;
+}
+.connectButton:hover {
+    background-color: #2b3250;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
-    .headerLeft p {
+    .headerLeft {
         display: none;
-    }
-    .headerLeft img {
-        width: 2rem;
     }
 }
