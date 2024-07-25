@@ -1,0 +1,26 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.headerLeft {
+    display: flex;
+    gap: 1rem;
+}
+.headerLeft p {
+    color: white;
+    font-weight: 700;
+}
+
+.headerRight {
+    display: flex;
+    gap: 1rem
+}
+.headerRight p {
+    border: solid 1px;
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+}
